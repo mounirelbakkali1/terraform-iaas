@@ -14,3 +14,7 @@ output "application-url" {
   #value = [for instance in aws_instance.web_server : "${aws_instance.web_server.public_ip}/index.php"]
   value = "http://${aws_instance.web_server.public_ip}"
 }
+
+output "table_name" {
+  value = aws_dynamodb_table.example.name
+}

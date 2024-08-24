@@ -1,1 +1,1 @@
-instance_tag_name= "web_server"
+instance_tag_name = "web_server"
