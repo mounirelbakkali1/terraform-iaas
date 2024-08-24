@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
 }
 
 resource "aws_default_vpc" "default" {
@@ -24,21 +24,21 @@ resource "aws_security_group" "web_servers_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = var.instance_name
+    Name = var.instance_tag_name+"-sg"
   }
 
 }
 
 resource "aws_instance" "web_server" {
-  ami           = "ami-00c39f71452c08778" # AMI IDs are region-specific
+  ami           =  var.default_instance_ami_id # AMI IDs are region-specific
   instance_type = "t2.micro"
   #count         = 2
   depends_on      = [aws_default_vpc.default]
   user_data       = file("init-script.sh")
-  key_name        = "mykeypair"
+  key_name        = var.key_pair
   security_groups = [aws_security_group.web_servers_security_group.name]
-
+  # vpc_security_group_ids = [ aws_security_group.web_servers_security_group.id ] also could be used to configure sg
   tags = {
-    Name = var.instance_name
+    Name = var.instance_tag_name
   }
 }

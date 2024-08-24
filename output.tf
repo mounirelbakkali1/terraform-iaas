@@ -12,5 +12,5 @@ output "instance_public_ip" {
 
 output "application-url" {
   #value = [for instance in aws_instance.web_server : "${aws_instance.web_server.public_ip}/index.php"]
-  value = "${aws_instance.web_server.public_ip}/index.php"
+  value = "http://${aws_instance.web_server.public_ip}"
 }
