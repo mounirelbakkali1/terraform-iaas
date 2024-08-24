@@ -1,5 +1,3 @@
-# Terraform
-
 ### Installation
 
 Via Choco package manager for Windows:
@@ -111,3 +109,30 @@ when using remote execution:
 
 - we remove the terraform.tfstate file from our local environment
 - we delegate the execution to the remote (cloud environment within HCP)
+
+## Getting Deeper:
+
+### Infra setup for a web server that accesses DynamoDB table and exposes a REST API
+
+1. **EC2 Instance Setup**
+    - **Provisioning**: Creates an EC2 instance with a specified security group for controlled access.
+    - **Security Group**: Configured to allow necessary traffic (e.g., HTTP, SSH).
+2. **DynamoDB Table Provisioning**
+    - **Table Creation**: Defines and provisions a DynamoDB table according to the requirements.
+    - **Schema Definition**: Includes table attributes and indices if needed.
+3. **IAM Role and Policy**
+    - **Role Creation**: Sets up an IAM role with permissions to access the DynamoDB table.
+    - **Policy Attachment**: Attaches a policy to the IAM role that grants necessary permissions.
+4. **Instance Profile Association**
+    - **Profile Attachment**: Associates the IAM role with the EC2 instance to provide it with DynamoDB access.
+5. **User Data Script Execution**
+    - **Environment Setup**: Installs required software (e.g., Java, Git) and sets up the environment.
+    - **Application Deployment**: Clones the repository, builds the application, and starts the web server.
+
+### How to Use
+
+To deploy the entire infrastructure and set up the web server, execute the following Terraform command:
+
+```bash
+terraform apply -var user_data_file=init-script-advanced.sh
+```
