@@ -20,12 +20,12 @@ resource "aws_default_vpc" "default" {
 }
 
 resource "aws_instance" "web_server" {
-  ami           = "ami-00c39f71452c08778"
+  ami           = "ami-00c39f71452c08778" # AMI IDs are region-specific
   instance_type = "t2.micro"
   count         = 2
-  depends_on = [ aws_default_vpc.default ]
+  depends_on    = [aws_default_vpc.default]
 
   tags = {
-    Name = "web_servers"
+    Name = var.instance_name
   }
 }
