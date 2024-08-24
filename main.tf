@@ -24,7 +24,7 @@ resource "aws_security_group" "web_servers_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = var.instance_tag_name+"-sg"
+    Name = "${var.instance_tag_name}-sg"
   }
 
 }
@@ -34,7 +34,7 @@ resource "aws_instance" "web_server" {
   instance_type = "t2.micro"
   #count         = 2
   depends_on      = [aws_default_vpc.default]
-  user_data       = file("init-script.sh")
+  user_data       = file(var.user_data_file)
   key_name        = var.key_pair
   security_groups = [aws_security_group.web_servers_security_group.name]
   # vpc_security_group_ids = [ aws_security_group.web_servers_security_group.id ] also could be used to configure sg

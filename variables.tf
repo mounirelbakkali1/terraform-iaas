@@ -4,6 +4,15 @@ variable "instance_tag_name" {
   default     = "web_server"
 }
 
+variable "user_data_file" {
+  type = string
+  default = "init-script.sh"
+  validation {
+    condition = length(regexall(".*\\.sh$", var.user_data_file)) > 0
+    error_message = "user data file path should be bash script file with .sh extension"
+  }
+}
+
 variable "default_instance_ami_id" {
   description = "Default Instance AMI ID"
   type = string
