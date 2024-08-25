@@ -1,6 +1,6 @@
 ### Terraform Getting Started Project
 
-![challenge](./assets/main.png)
+![challenge](./main.png)
 
 ### Installation
 
