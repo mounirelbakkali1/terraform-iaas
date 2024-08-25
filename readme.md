@@ -1,3 +1,7 @@
+### Terraform Getting Started Project
+
+![challenge](./assets/main.png)
+
 ### Installation
 
 Via Choco package manager for Windows:
